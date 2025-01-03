@@ -1,0 +1,12 @@
+function updateStatus() {       
+    let action = "update_status";     
+    $.ajax({  
+        type:'POST', 
+        url:"ls-functions/update-last-active.php",
+        data: {action:action},
+        complete:function(data) {
+            setTimeout(updateStatus, 5000);
+        }
+    }); 
+}
+setTimeout(updateStatus, 5000);

@@ -1,0 +1,34 @@
+const feedbackForm = document.querySelector(".feedback-form"),
+feedbackButton = document.querySelector("#send_feedback"),
+feedbackStatus = document.querySelector(".feedback-sent-notification"),
+feedbackEmail = document.querySelector("#email"),
+feedback = document.querySelector("#feedback");
+
+feedbackForm.onsubmit = (e) =>{
+    e.preventDefault();
+}
+
+function sendFeedback(){                
+    feedbackButton.innerHTML = "Sending...";
+    feedbackButton.disabled = true;
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "feedback-functions/feedback.php", true);
+    xhr.onload = ()=>{
+        if(xhr.readyState === XMLHttpRequest.DONE){
+            if(xhr.status === 200){
+                feedbackEmail.value = "";
+                feedback.value = "";
+                let data = xhr.response;      
+                feedbackStatus.innerHTML = data;
+                setTimeout(function() {
+                    feedbackStatus.innerHTML = "";
+                },6000);
+
+                feedbackButton.innerHTML = "Send";
+                feedbackButton.disabled = false;            
+            }
+        }
+    }
+    let formData = new FormData(feedbackForm);
+    xhr.send(formData);
+}

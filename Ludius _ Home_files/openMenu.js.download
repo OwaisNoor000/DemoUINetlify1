@@ -1,0 +1,38 @@
+const sidenav = document.querySelector("#mySideNav"),
+sidenavbtn = document.querySelector(".profile-sidebar-section .sideBar-btn"),
+burgermenu = document.querySelector("#burgermenu"),
+closeicon = document.querySelector(".hamburger .fa-bars");
+
+function openNav(){
+    sidenav.classList.toggle("open");
+    if(burgermenu.classList.contains("open")){
+        burgermenu.classList.remove("open");
+        closeicon.classList.replace("fa-times","fa-bars");    
+    }
+}
+
+function openBurgerMenu(){
+    burgermenu.classList.toggle("open");
+    if(closeicon.classList.contains("fa-bars")){
+        closeicon.classList.replace("fa-bars","fa-times");
+        if(sidenav.classList.contains("open")){
+            sidenav.classList.remove("open");
+        }
+    }
+    else{
+        closeicon.classList.replace("fa-times","fa-bars");    
+        if(sidenav.classList.contains("open")){
+            sidenav.classList.remove("open");
+        }
+    }
+}
+
+window.addEventListener('click', function(e){
+    if (e.target != sidenavbtn){
+        sidenav.classList.remove("open");
+    }
+    if(e.target != closeicon){
+        burgermenu.classList.remove("open");
+        closeicon.classList.replace("fa-times","fa-bars");
+    }
+});

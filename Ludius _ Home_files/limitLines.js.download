@@ -1,0 +1,14 @@
+function limitLines(obj, e){
+    let keynum, lines = obj.value.split('\n').length;  
+    //IE
+    if(window.event) {
+        keynum = e.keyCode;
+    // Netscape/Firefox/Opera
+    } else if(e.which) {
+        keynum = e.which;
+    }
+
+    if(keynum == 13 && lines == obj.rows) {
+        return false;
+    }      
+}
